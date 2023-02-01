@@ -15,19 +15,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/images", StaticFiles(directory="images"), name="images")
+app.mount("/output", StaticFiles(directory="output"), name="output")
 
-@app.post("/files")
+@app.post("/upload")
 async def UploadImage(file: bytes = File(...)):
-    with open('./images/'+'uuid.uuid4().hex[:6].upper()'+'.jpg','wb') as image:
+    with open('./input/'+'uuid.uuid4().hex[:6].upper()'+'.jpg','wb') as image:
         image.write(file)
         image.close()
     return {
         "message": "Image uploaded successfully",
-        "output1": "/output/name.jpg",
-        "output2": "/output/name.jpg",
-        "val1": "value1",
-        "val2": "value2",
-        "val3": "value3",
-        "val4": "value4"
+        "output1": "/output/1.jpg",
+        "output2": "/output/1.jpg",
+        "val1": 1,
+        "val2": 2,
+        "val3": 3,
+        "val4": 4
     }
